@@ -34,8 +34,19 @@ def scrape_updates(html_content):
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    selector = Selector(text=html_content)
+
+    next_page_element = selector.css(
+        'nav.navigation.pagination a.next.page-numbers'
+    )
+
+    if next_page_element:
+        # Use o método .attrib para acessar o valor do atributo 'href'
+        next_page_url = next_page_element.attrib.get('href')
+        return next_page_url
+
+    return None
+
 
 
 # Requisito 4
