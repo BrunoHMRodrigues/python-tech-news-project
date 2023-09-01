@@ -1,4 +1,5 @@
 # Requisito 1
+# Starting
 def fetch(url):
     """Seu código deve vir aqui"""
     raise NotImplementedError
