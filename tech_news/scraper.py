@@ -1,6 +1,6 @@
 # Requisito 1
 from parsel import Selector
-from urllib.parse import urlparse
+from tech_news.database import create_news
 import time
 import requests
 
@@ -73,5 +73,20 @@ def scrape_news(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    url = ("https://blog.betrybe.com/")
+    # page = fetch(url)
+    # urls = scrape_updates(page)
+    urls = []
+    news_list = []
+
+    while len(urls) < amount:
+        page = fetch(url)
+        urls.extend(scrape_updates(page))
+        url = scrape_next_page_link(page)
+
+    for n in range(0, amount):
+        news_data = scrape_news(fetch(urls[n]))
+        create_news(news_data)  # Insere a notícia no MongoDB
+        news_list.append(news_data)
+
+    return news_list
