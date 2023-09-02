@@ -1,7 +1,18 @@
+from tech_news.database import find_news
+
+
 # Requisito 7
 def search_by_title(title):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    news_data = find_news()
+
+    news_found = []
+
+    for news in news_data:
+        if title.lower() in news["title"].lower():
+            response = (news["title"], news["url"])
+            news_found.append(response)
+
+    return news_found
 
 
 # Requisito 8
