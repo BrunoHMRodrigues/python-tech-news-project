@@ -39,5 +39,13 @@ def search_by_date(date):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    news_data = find_news()
+
+    news_found = []
+
+    for news in news_data:
+        if category.lower() in news["category"].lower():
+            response = (news["title"], news["url"])
+            news_found.append(response)
+
+    return news_found
