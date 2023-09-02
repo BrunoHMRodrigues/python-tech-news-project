@@ -84,9 +84,14 @@ def get_tech_news(amount):
         urls.extend(scrape_updates(page))
         url = scrape_next_page_link(page)
 
+    # for n in range(0, amount):
+    #     news_data = scrape_news(fetch(urls[n]))
+    #     news_list.append(news_data)
+    #     create_news(news_list)  # Insere a notícia no MongoDB
     for n in range(0, amount):
         news_data = scrape_news(fetch(urls[n]))
-        create_news(news_data)  # Insere a notícia no MongoDB
         news_list.append(news_data)
+
+    create_news(news_list)  # Insere a notícia no MongoDB
 
     return news_list
